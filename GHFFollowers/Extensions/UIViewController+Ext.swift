@@ -14,9 +14,9 @@ import UIKit
  */
 extension UIViewController {
     // 这里之所以用mainThread是因为当有网络操作时，每次present都需要让alert在mainThread上执行，因此不如在这里直接写好
-    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String, actionAlert: (()->(Void))? = nil) {
         DispatchQueue.main.async {
-            let alertVC = GFAlertVC(alertTitle: title, alertMessage: message, alertButtonTitle: buttonTitle)
+            let alertVC = GFAlertVC(alertTitle: title, alertMessage: message, alertButtonTitle: buttonTitle, alertAction: actionAlert)
             alertVC.modalPresentationStyle = .overFullScreen
             alertVC.modalTransitionStyle = .crossDissolve
             self.present(alertVC, animated: true)

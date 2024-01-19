@@ -9,19 +9,22 @@ import UIKit
 
 class GFAlertVC: UIViewController {
     
-//    var alertTitle : String
-//    var alertMessage : String
-//    var alertButtonTitle : String
-    
     let alertView : GFAlertView
+    
+    var alertAction: (()->(Void))?
     
     init(alertTitle: String, alertMessage: String, alertButtonTitle: String) {
         
-//        self.alertTitle = alertTitle ?? "Title not exist"
-//        self.alertMessage = alertMessage ?? "Unable to complete request"
-//        self.alertButtonTitle = alertButtonTitle ?? "OK"
+        alertView = GFAlertView(title: alertTitle, message: alertMessage, buttonTitle: alertButtonTitle)
+        alertAction = {}
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(alertTitle: String, alertMessage: String, alertButtonTitle: String, alertAction: (()->(Void))? = nil ) {
         
         alertView = GFAlertView(title: alertTitle, message: alertMessage, buttonTitle: alertButtonTitle)
+        
+        self.alertAction = alertAction
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,7 +34,12 @@ class GFAlertVC: UIViewController {
     }
     
     @objc func dismissVC() {
+        
         dismiss(animated: true)
+        
+        if let alertActionSafe = alertAction {
+            alertActionSafe()
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
