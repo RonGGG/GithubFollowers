@@ -13,12 +13,12 @@ class GFAlertVC: UIViewController {
     
     var alertAction: (()->(Void))?
     
-    init(alertTitle: String, alertMessage: String, alertButtonTitle: String) {
-        
-        alertView = GFAlertView(title: alertTitle, message: alertMessage, buttonTitle: alertButtonTitle)
-        alertAction = {}
-        super.init(nibName: nil, bundle: nil)
-    }
+//    init(alertTitle: String, alertMessage: String, alertButtonTitle: String) {
+//        
+//        alertView = GFAlertView(title: alertTitle, message: alertMessage, buttonTitle: alertButtonTitle)
+//        alertAction = {}
+//        super.init(nibName: nil, bundle: nil)
+//    }
     
     init(alertTitle: String, alertMessage: String, alertButtonTitle: String, alertAction: (()->(Void))? = nil ) {
         

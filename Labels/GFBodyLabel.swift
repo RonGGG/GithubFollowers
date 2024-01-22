@@ -24,7 +24,7 @@ class GFBodyLabel: UILabel {
         configure()
     }
     
-    func configure() {
+    private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .label
         font = UIFont.preferredFont(forTextStyle: .body)

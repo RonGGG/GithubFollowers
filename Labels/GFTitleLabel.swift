@@ -25,7 +25,7 @@ class GFTitleLabel: UILabel {
         configure()
     }
     
-    func configure() {
+    private func configure() {
         translatesAutoresizingMaskIntoConstraints = false
         textColor = .label
         

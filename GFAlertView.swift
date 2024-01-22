@@ -34,7 +34,7 @@ class GFAlertView: UIView {
         configure()
     }
     
-    func configureActionButton() {
+    private func configureActionButton() {
         
         contentView.addSubview(actionButton)
         
@@ -46,7 +46,7 @@ class GFAlertView: UIView {
         ])
     }
     
-    func configureMessageLabel() {
+    private func configureMessageLabel() {
         
         contentView.addSubview(messageLabel)
         
@@ -61,7 +61,7 @@ class GFAlertView: UIView {
         ])
     }
     
-    func configureTitleLabel() {
+    private func configureTitleLabel() {
         
         contentView.addSubview(titleLabel)
         
@@ -74,7 +74,7 @@ class GFAlertView: UIView {
 
     }
     
-    func configureContentView() {
+    private func configureContentView() {
         // config contentView
         self.addSubview(contentView)
         contentView.backgroundColor = .systemBackground
@@ -94,7 +94,7 @@ class GFAlertView: UIView {
         configureActionButton()
         configureMessageLabel()
     }
-    func configure() {
+    private func configure() {
         
         configureContentView()
         

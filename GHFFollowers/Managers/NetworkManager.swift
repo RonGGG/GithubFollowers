@@ -12,6 +12,8 @@ class NetworkManager {
     
     private let baseUrl = "https://api.github.com/"
     
+    let cache = NSCache<NSString,NSData>()
+    
     // to restrict that the init cannot be called from ourside, so that 'shared' is the only way to access the NetworkManager
     private init () {}
     
@@ -20,26 +22,22 @@ class NetworkManager {
         let endPoint = baseUrl + "users/\(username)/followers?per_page=100&page=\(page)"
         
         guard let url = URL(string: endPoint) else {
-//            completed(nil,"The username created an invalid request.")
             completed(.failure(.invalidUsername))
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { date, response, error in
             if let _ = error {
-//                completed(nil, "Unable to complete your request. Please check the internet connection.")
                 completed(.failure(.unableToComplete))
                 return
             }
             
             guard let responseSafe = response as? HTTPURLResponse, responseSafe.statusCode == 200 else {
-//                completed(nil, "Invalid response. Please try again.")
                 completed(.failure(.invalidResponse))
                 return
             }
             
-            guard let dataSafe = date else { 
-//                completed(nil, "The data from server is invalid. Please try again.")
+            guard let dataSafe = date else {
                 completed(.failure(.invalidData))
                 return
             }
@@ -48,12 +46,37 @@ class NetworkManager {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let followers = try decoder.decode([Follower].self, from: dataSafe)
-//                completed(followers,nil)
                 completed(.success(followers))
             } catch {
-//                completed(nil,"The data from server is uncodable. Please try again.")
                 completed(.failure(.invalidData))
             }
+        }
+        task.resume()
+    }
+    
+    func downloadImage(from urlString: String, completed: @escaping (Data)->(Void)) {
+        
+        if let imgData = cache.object(forKey: NSString(string: urlString)) {
+            
+            completed(imgData as Data)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
+            
+            // check
+            guard let self = self else { return }
+            if error != nil { return }
+            guard let responseSafe = response as? HTTPURLResponse, responseSafe.statusCode == 200 else { return }
+            guard let dataSafe = data else { return }
+            
+            // check cache
+            self.cache.setObject(dataSafe as NSData, forKey: NSString(string: urlString))
+            
+            // completed
+            completed(dataSafe)
         }
         task.resume()
     }
