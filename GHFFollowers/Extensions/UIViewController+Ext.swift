@@ -6,6 +6,9 @@
 //
 
 import UIKit
+
+
+fileprivate var loadingView: UIView!
 /*
  这里是extension的第二种用途：
  当想扩充某一个系统自定义类的类方法的时候可以用extension
@@ -22,4 +25,42 @@ extension UIViewController {
             self.present(alertVC, animated: true)
         }
     }
+    
+    func presentLoadingView() {
+        loadingView = UIView(frame: view.bounds)
+        view.addSubview(loadingView)
+        
+        loadingView.backgroundColor = .systemBackground
+        loadingView.alpha = 0
+        
+        UIView.animate(withDuration: 0.25) {
+            loadingView.alpha = 0.8
+        }
+        
+        let indicatorView = UIActivityIndicatorView(style: .large)
+        loadingView.addSubview(indicatorView)
+        
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            indicatorView.centerXAnchor.constraint(equalTo: loadingView.centerXAnchor),
+            indicatorView.centerYAnchor.constraint(equalTo: loadingView.centerYAnchor)
+        ])
+        
+        indicatorView.startAnimating()
+    }
+    
+    func dismissLoadingView() {
+        DispatchQueue.main.async {
+            loadingView.removeFromSuperview()
+            loadingView = nil
+        }
+    }
+    
+    func showEmptyStateView(with message: String, in view: UIView) {
+        let emtyStateView = GFEmptyView(message: message)
+        view.addSubview(emtyStateView)
+        emtyStateView.frame = view.bounds
+    }
+
 }

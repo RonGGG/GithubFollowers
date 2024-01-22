@@ -50,4 +50,9 @@ class FollowerCell: UICollectionViewCell {
             usernameLabel.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.avatarImageView.image = nil
+//        self.usernameLabel = nil
+    }
 }

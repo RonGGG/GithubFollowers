@@ -28,6 +28,7 @@
 		7FF9AECA2B5A82A200918470 /* FollowerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AEC92B5A82A200918470 /* FollowerCell.swift */; };
 		7FF9AECC2B5A8BAE00918470 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECB2B5A8BAE00918470 /* GFAvatarImageView.swift */; };
 		7FF9AECE2B5E137C00918470 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECD2B5E137C00918470 /* UIHelper.swift */; };
+		7FF9AED02B5E941900918470 /* GFEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECF2B5E941900918470 /* GFEmptyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		7FF9AEC92B5A82A200918470 /* FollowerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCell.swift; sourceTree = "<group>"; };
 		7FF9AECB2B5A8BAE00918470 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		7FF9AECD2B5E137C00918470 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
+		7FF9AECF2B5E941900918470 /* GFEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				7F216F9F2B5792A00094D7F8 /* GFTextField.swift */,
 				7F216FA92B57FC720094D7F8 /* GFAlertView.swift */,
 				7FF9AECB2B5A8BAE00918470 /* GFAvatarImageView.swift */,
+				7FF9AECF2B5E941900918470 /* GFEmptyView.swift */,
 			);
 			name = "Custom Views";
 			path = ..;
@@ -262,6 +265,7 @@
 				7F216FA62B57F9520094D7F8 /* GFBodyLabel.swift in Sources */,
 				7F216FA22B57AF0F0094D7F8 /* FollowerListVC.swift in Sources */,
 				7FF9AEC62B5A4BDE00918470 /* ErrorMessage.swift in Sources */,
+				7FF9AED02B5E941900918470 /* GFEmptyView.swift in Sources */,
 				7FF9AECE2B5E137C00918470 /* UIHelper.swift in Sources */,
 				7F216F842B556D3B0094D7F8 /* AppDelegate.swift in Sources */,
 				7F216FA42B57F93D0094D7F8 /* GFTitleLabel.swift in Sources */,

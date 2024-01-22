@@ -8,8 +8,11 @@
 import UIKit
 
 class FollowerListVC: UIViewController {
-
+    
     var username : String!
+    
+    var currentPage: Int = 1
+    var hasMoreFollowers: Bool = true
     
     var collectionView: UICollectionView!
     
@@ -19,11 +22,11 @@ class FollowerListVC: UIViewController {
     }
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
-    var followers: [Follower]!
+    var followers: [Follower] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -38,19 +41,32 @@ class FollowerListVC: UIViewController {
     }
     
     private func getFollowers() {
-        NetworkManager.shared.getFollowers(for: username, page: 1) {[weak self] result in
+        presentLoadingView()
+        NetworkManager.shared.getFollowers(for: username, page: currentPage) {[weak self] result in
             // weak self might be nil
             guard let self = self else { return }
-            
+            self.dismissLoadingView()
             switch result{
-                case .success(let followers):
-                    self.followers = followers
-                    self.updateData()
+            case .success(let followers):
+                if followers.count < 100 {
+                    hasMoreFollowers = false
+                }
+                self.followers.append(contentsOf: followers)
                 
-                case .failure(let error):
-                    self.presentGFAlertOnMainThread(title: "Request error", message: error.rawValue, buttonTitle: "OK") {
-                        self.navigationController?.popViewController(animated: true)
+                if self.followers.isEmpty {
+                    DispatchQueue.main.async {
+                        self.showEmptyStateView(with: "This user doesn't have any followers.", in: self.view)
                     }
+                }
+                
+                self.currentPage+=1
+                
+                self.updateData()
+                
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Request error", message: error.rawValue, buttonTitle: "OK") {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
@@ -61,6 +77,8 @@ class FollowerListVC: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
+        // delegate
+        collectionView.delegate = self
     }
     
     private func configureDataSource () {
@@ -77,6 +95,23 @@ class FollowerListVC: UIViewController {
         snapshot.appendItems(followers)
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
+    }
+    
+}
+
+extension FollowerListVC: UICollectionViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let contentOffset = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if contentOffset > (contentHeight - height) {
+            // return if there are no more followers
+            guard hasMoreFollowers else { return }
+            
+            getFollowers()
         }
     }
 }
