@@ -29,6 +29,7 @@
 		7FF9AECC2B5A8BAE00918470 /* GFAvatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECB2B5A8BAE00918470 /* GFAvatarImageView.swift */; };
 		7FF9AECE2B5E137C00918470 /* UIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECD2B5E137C00918470 /* UIHelper.swift */; };
 		7FF9AED02B5E941900918470 /* GFEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AECF2B5E941900918470 /* GFEmptyView.swift */; };
+		7FF9AED22B5FF81E00918470 /* UserInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AED12B5FF81E00918470 /* UserInfoVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		7FF9AECB2B5A8BAE00918470 /* GFAvatarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFAvatarImageView.swift; sourceTree = "<group>"; };
 		7FF9AECD2B5E137C00918470 /* UIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelper.swift; sourceTree = "<group>"; };
 		7FF9AECF2B5E941900918470 /* GFEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFEmptyView.swift; sourceTree = "<group>"; };
+		7FF9AED12B5FF81E00918470 /* UserInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				7F216F992B557B6C0094D7F8 /* FavoriteListVC.swift */,
 				7F216FA12B57AF0F0094D7F8 /* FollowerListVC.swift */,
 				7F216FA72B57FC480094D7F8 /* GFAlertVC.swift */,
+				7FF9AED12B5FF81E00918470 /* UserInfoVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				7FF9AECC2B5A8BAE00918470 /* GFAvatarImageView.swift in Sources */,
 				7F216F9A2B557B6C0094D7F8 /* FavoriteListVC.swift in Sources */,
 				7FF9AEC32B5A11B200918470 /* User.swift in Sources */,
+				7FF9AED22B5FF81E00918470 /* UserInfoVC.swift in Sources */,
 				7F216FA82B57FC480094D7F8 /* GFAlertVC.swift in Sources */,
 				7F216FA62B57F9520094D7F8 /* GFBodyLabel.swift in Sources */,
 				7F216FA22B57AF0F0094D7F8 /* FollowerListVC.swift in Sources */,

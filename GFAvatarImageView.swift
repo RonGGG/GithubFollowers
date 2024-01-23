@@ -36,4 +36,8 @@ class GFAvatarImageView: UIImageView {
             }
         }
     }
+    
+    func setDefaultImg(){
+        image = placeholderImg
+    }
 }
