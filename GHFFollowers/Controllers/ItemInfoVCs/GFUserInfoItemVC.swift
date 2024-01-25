@@ -13,6 +13,8 @@ class GFUserInfoItemVC: UIViewController {
     let itemView1 = GFItemInfoView(frame: .zero)
     let itemView2 = GFItemInfoView(frame: .zero)
     let button = GFButton(background: .systemPurple, title: "")
+        
+    var userInfoDelegate : UserInforVCDelegate?
     
     let user : User
     
@@ -29,9 +31,17 @@ class GFUserInfoItemVC: UIViewController {
         super.viewDidLoad()
 
         layoutUI()
-        configureUIElements()
+//        configureUIElements()
+        
+        button.addTarget(self, action: #selector(pressedButton), for: .touchUpInside)
     }
-
+    
+    @objc private func pressedButton () {
+        guard let userInfoDelegateSafe = userInfoDelegate else { return }
+        
+        userInfoDelegateSafe.didClickActionButton(sender: button)
+    }
+    
     private func layoutUI(){
         view.addSubview(stackView)
         view.addSubview(button)
@@ -47,8 +57,6 @@ class GFUserInfoItemVC: UIViewController {
         view.backgroundColor = .secondarySystemBackground
         
         let padding:CGFloat = 20
-        let insidePadding:CGFloat = 10
-//        let itemWidth:CGFloat = (view.bounds.width - (padding * 2) - insidePadding)/2
         
         NSLayoutConstraint.activate([
             button.heightAnchor.constraint(equalToConstant: 50),
@@ -60,22 +68,11 @@ class GFUserInfoItemVC: UIViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             stackView.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -8)
-            
-            //
-//            itemView1.topAnchor.constraint(equalTo: stackView.topAnchor, constant: padding),
-//            itemView1.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: padding),
-//            itemView1.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -padding),
-//            itemView1.widthAnchor.constraint(equalToConstant: itemWidth),
-//            
-//            itemView2.topAnchor.constraint(equalTo: stackView.topAnchor, constant: padding),
-//            itemView2.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -padding),
-//            itemView2.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -padding),
-//            itemView2.widthAnchor.constraint(equalToConstant: itemWidth)
         ])
     }
-    private func configureUIElements(){
-        itemView1.set(itemInfo: .repos, with: user.publicRepos)
-        itemView2.set(itemInfo: .gists, with: user.publicGists)
-        button.setTitle("GitHub Profile", for: .normal)
-    }
+//    private func configureUIElements(){
+//        itemView1.set(itemInfo: .repos, with: user.publicRepos)
+//        itemView2.set(itemInfo: .gists, with: user.publicGists)
+//        button.setTitle("GitHub Profile", for: .normal)
+//    }
 }

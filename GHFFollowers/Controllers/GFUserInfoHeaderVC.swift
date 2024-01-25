@@ -47,6 +47,9 @@ class GFUserInfoHeaderVC: UIViewController {
     
     private func layoutUI(){
         
+        nameLabel.textColor = .secondaryLabel
+        locationLabel.textColor = .secondaryLabel
+        
         locationImageView.translatesAutoresizingMaskIntoConstraints = false
         
         let padding: CGFloat = 20

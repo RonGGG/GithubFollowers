@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol UserInforVCDelegate {
+    func didClickActionButton (sender: UIButton)
+}
+
 class UserInfoVC: UIViewController {
     
     var username : String!
@@ -36,7 +40,14 @@ class UserInfoVC: UIViewController {
             case .success(let user):
                 DispatchQueue.main.async {
                     self.addChildVC(childVC: GFUserInfoHeaderVC(user: user), to: self.headerView)
-                    self.addChildVC(childVC: GFUserInfoItemVC(user: user), to: self.itemView1)
+                    
+                    let repoItemVC = GFRepoItemVC(user: user)
+                    repoItemVC.userInfoDelegate = self
+                    self.addChildVC(childVC: repoItemVC, to: self.itemView1)
+                    
+                    let followerItemVC = GFFollowerItemVC(user: user)
+                    followerItemVC.userInfoDelegate = self
+                    self.addChildVC(childVC: followerItemVC, to: self.itemView2)
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Request error", message: error.rawValue, buttonTitle: "OK")
@@ -57,8 +68,6 @@ class UserInfoVC: UIViewController {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         itemView1.translatesAutoresizingMaskIntoConstraints = false
         itemView2.translatesAutoresizingMaskIntoConstraints = false
-        
-        itemView2.backgroundColor = .systemBlue
         
         let padding:CGFloat = 20
         
@@ -86,4 +95,19 @@ class UserInfoVC: UIViewController {
         childVC.view.frame = containerView.bounds
         childVC.didMove(toParent: self)
     }
+}
+
+extension UserInfoVC: UserInforVCDelegate {
+    func didClickActionButton(sender: UIButton) {
+//        print("clicked\(sender.tag)")
+        switch sender.tag {
+        case 0:
+            break
+        case 1:
+            break
+        default:
+            break
+        }
+    }
+    
 }
