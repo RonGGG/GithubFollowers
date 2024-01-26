@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol UserInforVCDelegate {
-    func didClickActionButton (sender: UIButton)
+protocol UserInforVCDelegate: AnyObject {
+    func didClickActionButton (sender: UIButton, user: User)
 }
 
 class UserInfoVC: UIViewController {
@@ -18,6 +18,8 @@ class UserInfoVC: UIViewController {
     let headerView = UIView()
     let itemView1 = UIView()
     let itemView2 = UIView()
+    
+    weak var followerListVCDelagate: FollowerListVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,13 +100,21 @@ class UserInfoVC: UIViewController {
 }
 
 extension UserInfoVC: UserInforVCDelegate {
-    func didClickActionButton(sender: UIButton) {
+    func didClickActionButton(sender: UIButton, user: User) {
+        
 //        print("clicked\(sender.tag)")
         switch sender.tag {
-        case 0:
-            break
-        case 1:
-            break
+        case 0: // clicked GitHub Profile
+            presentSafariVC(url: user.htmlUrl)
+        case 1: // clicked Get Followers
+            if user.followers == 0 {
+                presentGFAlertOnMainThread(title: "No followers", message: "This user doesn't have followers.", buttonTitle: "OK")
+                return
+            }
+            guard let delegateSafe = followerListVCDelagate else { return }
+            delegateSafe.didRequestFollowers(username: user.login)
+            
+            dismissVC()
         default:
             break
         }

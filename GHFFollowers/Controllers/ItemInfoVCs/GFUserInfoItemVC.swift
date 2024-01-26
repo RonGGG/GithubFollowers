@@ -14,7 +14,7 @@ class GFUserInfoItemVC: UIViewController {
     let itemView2 = GFItemInfoView(frame: .zero)
     let button = GFButton(background: .systemPurple, title: "")
         
-    var userInfoDelegate : UserInforVCDelegate?
+    weak var userInfoDelegate : UserInforVCDelegate?
     
     let user : User
     
@@ -39,7 +39,7 @@ class GFUserInfoItemVC: UIViewController {
     @objc private func pressedButton () {
         guard let userInfoDelegateSafe = userInfoDelegate else { return }
         
-        userInfoDelegateSafe.didClickActionButton(sender: button)
+        userInfoDelegateSafe.didClickActionButton(sender: button, user: user)
     }
     
     private func layoutUI(){

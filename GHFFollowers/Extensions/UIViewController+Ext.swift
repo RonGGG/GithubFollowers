@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import SafariServices
 
 fileprivate var loadingView: UIView!
 /*
@@ -61,6 +61,14 @@ extension UIViewController {
         let emtyStateView = GFEmptyView(message: message)
         view.addSubview(emtyStateView)
         emtyStateView.frame = view.bounds
+    }
+    
+    func presentSafariVC(url: String) {
+        guard let safeUrl = URL(string: url) else { return }
+        
+        let safariVC = SFSafariViewController(url: safeUrl)
+        safariVC.preferredControlTintColor = .systemGreen
+        present(safariVC, animated: true)
     }
 
 }
