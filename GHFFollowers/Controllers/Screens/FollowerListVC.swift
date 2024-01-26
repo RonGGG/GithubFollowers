@@ -6,9 +6,11 @@
 //
 
 import UIKit
+
 protocol FollowerListVCDelegate: AnyObject {
     func didRequestFollowers(username: String)
 }
+
 class FollowerListVC: UIViewController {
     
     var username : String!
@@ -34,6 +36,7 @@ class FollowerListVC: UIViewController {
         
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAction))
         
         configureCollectionView()
         getFollowers()
@@ -75,6 +78,10 @@ class FollowerListVC: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func addAction(){
+
     }
     
     //MARK: - UICollectionView
