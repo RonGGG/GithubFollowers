@@ -18,12 +18,13 @@ class FollowerListVC: UIViewController {
     var currentPage: Int = 1
     var hasMoreFollowers: Bool = true
     
-    var collectionView: UICollectionView!
+    var collectionView : UICollectionView!
     
     // enum is hashable by default
     enum Section {
         case mainSec
     }
+    
     var dataSource: UICollectionViewDiffableDataSource<Section, Follower>!
     
     var followers: [Follower] = []
@@ -81,7 +82,23 @@ class FollowerListVC: UIViewController {
     }
     
     @objc private func addAction(){
-
+        NetworkManager.shared.getUserInfo(for: username) {[weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let user):
+                PersistenceManager.update(favorite: Follower(login: user.login, avatarUrl: user.avatarUrl), type: .add) {[weak self] error in
+                    guard let self = self else { return }
+                    guard let errorSafe = error else {
+                        self.presentGFAlertOnMainThread(title: "Successfully favorited", message: "You have successfully favorited this user!", buttonTitle: "OK")
+                        return
+                    }
+                    self.presentGFAlertOnMainThread(title: "Request Error", message: errorSafe.rawValue, buttonTitle: "OK")
+                }
+            case .failure(let error):
+                self.presentGFAlertOnMainThread(title: "Request Error", message: error.rawValue, buttonTitle: "OK")
+            }
+        }
     }
     
     //MARK: - UICollectionView
@@ -89,6 +106,7 @@ class FollowerListVC: UIViewController {
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.createThreeColumnFlowLayout(for: view))
         view.addSubview(collectionView)
+        
         collectionView.backgroundColor = .systemBackground
         collectionView.register(FollowerCell.self, forCellWithReuseIdentifier: FollowerCell.reuseID)
         // delegate

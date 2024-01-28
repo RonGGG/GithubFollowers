@@ -15,4 +15,7 @@ enum GFError: String, Error {
     
     case unableToRetrieveFavorites = "The favorites list is not able to retrieve."
     case unableToSaveFavorites = "The favorites list is not able to save."
+    
+    case userExistInFavoriteList = "This user is already exist in the favorite list."
+    case userNotExistInFavoriteList = "This user is not exist in the favorite list."
 }

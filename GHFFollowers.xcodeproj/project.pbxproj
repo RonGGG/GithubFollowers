@@ -37,6 +37,7 @@
 		7FF9AEDE2B62983400918470 /* GFRepoItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AEDD2B62983400918470 /* GFRepoItemVC.swift */; };
 		7FF9AEE02B629A2B00918470 /* GFFollowerItemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AEDF2B629A2B00918470 /* GFFollowerItemVC.swift */; };
 		7FF9AEE52B63E96F00918470 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AEE42B63E96F00918470 /* PersistenceManager.swift */; };
+		7FF9AEE72B66490F00918470 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF9AEE62B66490F00918470 /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		7FF9AEDD2B62983400918470 /* GFRepoItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFRepoItemVC.swift; sourceTree = "<group>"; };
 		7FF9AEDF2B629A2B00918470 /* GFFollowerItemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GFFollowerItemVC.swift; sourceTree = "<group>"; };
 		7FF9AEE42B63E96F00918470 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		7FF9AEE62B66490F00918470 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				7FF9AEC92B5A82A200918470 /* FollowerCell.swift */,
+				7FF9AEE62B66490F00918470 /* FavoriteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				7FF9AED02B5E941900918470 /* GFEmptyView.swift in Sources */,
 				7FF9AECE2B5E137C00918470 /* UIHelper.swift in Sources */,
 				7F216F842B556D3B0094D7F8 /* AppDelegate.swift in Sources */,
+				7FF9AEE72B66490F00918470 /* FavoriteCell.swift in Sources */,
 				7FF9AED42B60C1D300918470 /* GFUserInfoItemVC.swift in Sources */,
 				7F216FA42B57F93D0094D7F8 /* GFTitleLabel.swift in Sources */,
 				7FF9AEDC2B612CBC00918470 /* GFItemInfoView.swift in Sources */,

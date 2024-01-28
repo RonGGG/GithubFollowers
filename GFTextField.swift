@@ -39,7 +39,7 @@ class GFTextField: UITextField {
         
 //        keyboardType = .emailAddress // 键盘类型
         returnKeyType = .go // return键类型
-        
+        clearButtonMode = .whileEditing // 结尾的一键删除
         placeholder = "Enter a username"
     }
     

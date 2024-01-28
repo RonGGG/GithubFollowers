@@ -7,12 +7,40 @@
 
 import Foundation
 
+enum PersistenceActionType {
+    case add, remove
+}
+
 enum PersistenceManager {
     
     static private let defaults = UserDefaults.standard
     
     private enum Keys {
         static let favorites = "favorites"
+    }
+    
+    static func update(favorite: Follower, type: PersistenceActionType, completed: @escaping (GFError?)->Void){
+        retrieveFavorites { result in
+            switch result {
+            case .success(let favorites):
+                var retrivedFavorites = favorites
+                
+                switch type {
+                case .add:
+                    if favorites.contains(where: { $0.login == favorite.login }) {
+                        completed(.userExistInFavoriteList)
+                        return
+                    }
+                    retrivedFavorites.append(favorite)
+                case .remove:
+                    // 这里不用判断是否存在该user
+                    retrivedFavorites.removeAll { $0.login == favorite.login }
+                }
+                completed(save(favorites: retrivedFavorites))
+            case .failure(let error):
+                completed(error)
+            }
+        }
     }
     
     // load favorites from UserDefaults.plist
