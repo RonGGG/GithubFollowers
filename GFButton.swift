@@ -33,13 +33,11 @@ class GFButton: UIButton {
     }
     
     // initialize with background and title for UIButton
-    init(background: UIColor, title: String) {
+    convenience init(background: UIColor, title: String) {
         
-        super.init(frame: .zero)
+        self.init(frame: .zero)
         self.backgroundColor = background
         self.setTitle(title, for: .normal)
-        
-        configure()
     }
     
     
