@@ -35,7 +35,9 @@ class FavoriteListVC: UIViewController {
             switch result {
             case .success(let favorites):
                 self.favorites = favorites
-                print(favorites)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Request error", message: error.rawValue, buttonTitle: "OK")
             }
@@ -71,7 +73,10 @@ extension FavoriteListVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let username = favorites[indexPath.row].login
+        let destVC = FollowerListVC(username: username)
+        navigationController?.pushViewController(destVC, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
