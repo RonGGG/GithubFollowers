@@ -18,6 +18,7 @@ class UserInfoVC: UIViewController {
     let headerView = UIView()
     let itemView1 = UIView()
     let itemView2 = UIView()
+    let dateLabel = GFTitleLabel(textAlignment: .center, font: UIFont.systemFont(ofSize: 15, weight: .regular))
     
     weak var followerListVCDelagate: FollowerListVCDelegate?
     
@@ -50,6 +51,8 @@ class UserInfoVC: UIViewController {
                     let followerItemVC = GFFollowerItemVC(user: user)
                     followerItemVC.userInfoDelegate = self
                     self.addChildVC(childVC: followerItemVC, to: self.itemView2)
+                    
+                    self.dateLabel.text = "GitHub since \(user.createdAt.convertToMonthYearFormat())"
                 }
             case .failure(let error):
                 self.presentGFAlertOnMainThread(title: "Request error", message: error.rawValue, buttonTitle: "OK")
@@ -66,10 +69,14 @@ class UserInfoVC: UIViewController {
         view.addSubview(headerView)
         view.addSubview(itemView1)
         view.addSubview(itemView2)
+        view.addSubview(dateLabel)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         itemView1.translatesAutoresizingMaskIntoConstraints = false
         itemView2.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        dateLabel.textColor = .secondaryLabel
         
         let padding:CGFloat = 20
         
@@ -88,6 +95,12 @@ class UserInfoVC: UIViewController {
             itemView2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             itemView2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             itemView2.heightAnchor.constraint(equalToConstant: 160),
+            
+            dateLabel.topAnchor.constraint(equalTo: itemView2.bottomAnchor, constant: padding/2),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            dateLabel.heightAnchor.constraint(equalToConstant: 40)
+            
         ])
     }
     

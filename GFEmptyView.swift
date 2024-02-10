@@ -36,7 +36,7 @@ class GFEmptyView: UIView {
         addSubview(logoImageView)
         
         
-        logoImageView.image = UIImage(named: "empty-state-logo")
+        logoImageView.image = Images.emptyStateLogo
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         
 //        messagelabel.text = "This user doesn't have any followers."

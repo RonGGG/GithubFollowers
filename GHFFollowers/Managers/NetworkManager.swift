@@ -68,10 +68,10 @@ class NetworkManager {
         let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
             
             // check
-            guard let self = self else { return }
-            if error != nil { return }
-            guard let responseSafe = response as? HTTPURLResponse, responseSafe.statusCode == 200 else { return }
-            guard let dataSafe = data else { return }
+            guard let self = self,
+                  error == nil,
+                  let responseSafe = response as? HTTPURLResponse, responseSafe.statusCode == 200,
+                  let dataSafe = data else { return }
             
             // check cache
             self.cache.setObject(dataSafe as NSData, forKey: NSString(string: urlString))
@@ -81,6 +81,7 @@ class NetworkManager {
         }
         task.resume()
     }
+    
     
     func getUserInfo(for username: String, completed: @escaping (Result<User, GFError>)->(Void)) {
         let endPoint = baseUrl + "users/\(username)"
@@ -108,6 +109,7 @@ class NetworkManager {
             do{
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 let user = try decoder.decode(User.self, from: dataSafe)
                 completed(.success(user))
             }

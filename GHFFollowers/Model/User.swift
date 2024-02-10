@@ -22,4 +22,6 @@ struct User: Codable {
     var following: Int
     var followers: Int
     var followersUrl: String // Get Followers
+    
+    var createdAt: Date
 }
