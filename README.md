@@ -2,7 +2,7 @@
 
 ## Overview
 
-This app enables user search functionality on Github, displaying follower lists and individual user profiles via the Github REST APIs.
+This app enables user search functionality on Github, displaying follower lists and individual user profiles via the Github REST APIs with fancy user interfaces.
 
 ## Features
 
